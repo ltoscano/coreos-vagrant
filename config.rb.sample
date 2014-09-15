@@ -49,3 +49,5 @@
 #$vb_gui = false
 #$vb_memory = 1024
 #$vb_cpus = 1
+$PMX_PORT_UI = 8888
+$PMX_PORT_API = 8889
