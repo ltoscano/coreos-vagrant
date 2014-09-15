@@ -100,7 +100,11 @@ Vagrant.configure("2") do |config|
         config.vm.provision :file, :source => "#{CLOUD_CONFIG_PATH}", :destination => "/tmp/vagrantfile-user-data"
         config.vm.provision :shell, :inline => "mv /tmp/vagrantfile-user-data /var/lib/coreos-vagrant/", :privileged => true
       end
-
+    
+      # Install Panamax
+      config.vm.provision "shell", inline: "sudo curl -O http://download.panamax.io/installer/pmx-installer-latest.zip && unzip pmx-installer-latest.zip -d /var/panamax", keep_color: "true"
+      config.vm.provision "shell", inline: "sudo cd /var/panamax",keep_color: "true"
+      config.vm.provision "shell", inline: "sudo ./coreos install --stable",keep_color: "true"
     end
   end
 end
