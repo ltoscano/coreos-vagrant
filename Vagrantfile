@@ -65,9 +65,14 @@ Vagrant.configure("2") do |config|
           v.vmx["serial0.tryNoRxLoss"] = "FALSE"
         end
 
+        config.vm.network "forwarded_port", guest: 3000, host: 8888
+        config.vm.network "forwarded_port", guest: 3001, host: 8889
         config.vm.provider :virtualbox do |vb, override|
           vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
           vb.customize ["modifyvm", :id, "--uartmode1", serialFile]
+          #vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+          #vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+          vb.customize ["modifyvm", :id, "--ioapic", "on"]
         end
       end
 
