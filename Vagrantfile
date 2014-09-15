@@ -15,6 +15,8 @@ $enable_serial_logging = false
 $vb_gui = false
 $vb_memory = 1024
 $vb_cpus = 1
+$PMX_PORT_UI=8888
+$PMX_PORT_API=8889
 
 # Attempt to apply the deprecated environment variable NUM_INSTANCES to
 # $num_instances while allowing config.rb to override it
@@ -65,8 +67,8 @@ Vagrant.configure("2") do |config|
           v.vmx["serial0.tryNoRxLoss"] = "FALSE"
         end
 
-        config.vm.network "forwarded_port", guest: 3000, host: 8888
-        config.vm.network "forwarded_port", guest: 3001, host: 8889
+        config.vm.network "forwarded_port", guest: 3000, host: $PMX_PORT_UI
+        config.vm.network "forwarded_port", guest: 3001, host: $PMX_PORT_API
         config.vm.provider :virtualbox do |vb, override|
           vb.customize ["modifyvm", :id, "--uart1", "0x3F8", "4"]
           vb.customize ["modifyvm", :id, "--uartmode1", serialFile]
