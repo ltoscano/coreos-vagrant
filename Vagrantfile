@@ -105,8 +105,7 @@ Vagrant.configure("2") do |config|
     
       # Install Panamax
       config.vm.provision "shell", inline: "sudo curl -O http://download.panamax.io/installer/pmx-installer-latest.zip && unzip pmx-installer-latest.zip -d /var/panamax", keep_color: "true"
-      config.vm.provision "shell", inline: "sudo cd /var/panamax",keep_color: "true"
-      config.vm.provision "shell", inline: "sudo ./coreos install --stable",keep_color: "true"
+      config.vm.provision "shell", inline: "sudo cd /var/panamax; sudo ./coreos install --stable",keep_color: "true"
     end
   end
 end
